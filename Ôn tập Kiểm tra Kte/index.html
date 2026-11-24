@@ -1,0 +1,774 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ôn Tập Trắc Nghiệm Quản Trị Học (490 Câu)</title>
+    <style>
+      :root {
+        --primary: #2563eb;
+        --primary-dark: #1d4ed8;
+        --bg: #f1f5f9;
+        --card: #ffffff;
+        --text: #0f172a;
+        --muted: #64748b;
+        --border: #e2e8f0;
+        --success: #16a34a;
+        --success-bg: #dcfce7;
+        --danger: #dc2626;
+        --danger-bg: #fee2e2;
+        --basic: #0284c7;
+        --basic-bg: #e0f2fe;
+        --adv: #9333ea;
+        --adv-bg: #f3e8ff;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family:
+          "Segoe UI",
+          system-ui,
+          -apple-system,
+          sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.55;
+      }
+      header {
+        background: var(--card);
+        border-bottom: 1px solid var(--border);
+        padding: 14px 24px;
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .brand h1 {
+        font-size: 1.15rem;
+        color: var(--primary);
+      }
+      .brand p {
+        font-size: 0.82rem;
+        color: var(--muted);
+      }
+      .header-stats {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+      .pill {
+        background: var(--bg);
+        padding: 6px 12px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+      }
+      .container {
+        max-width: 1240px;
+        margin: 20px auto;
+        padding: 0 16px 40px;
+      }
+      /* Setup Panel */
+      .setup-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      }
+      .setup-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 14px;
+        margin-bottom: 16px;
+      }
+      label {
+        display: block;
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: var(--muted);
+        margin-bottom: 6px;
+      }
+      select,
+      button {
+        font-family: inherit;
+        font-size: 0.92rem;
+      }
+      select {
+        width: 100%;
+        padding: 9px 12px;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        background: #fff;
+        color: var(--text);
+      }
+      .controls-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 12px;
+        border-top: 1px solid var(--border);
+      }
+      .checkbox-group {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        font-size: 0.9rem;
+      }
+      .checkbox-group label {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin: 0;
+        color: var(--text);
+        font-weight: 500;
+        cursor: pointer;
+      }
+      .btn {
+        padding: 9px 18px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+        transition: 0.15s;
+      }
+      .btn-primary {
+        background: var(--primary);
+        color: #fff;
+      }
+      .btn-primary:hover {
+        background: var(--primary-dark);
+      }
+      .btn-outline {
+        background: #fff;
+        color: var(--text);
+        border: 1px solid var(--border);
+      }
+      .btn-outline:hover {
+        background: var(--bg);
+      }
+      .btn-success {
+        background: var(--success);
+        color: #fff;
+      }
+      .btn-danger {
+        background: var(--danger);
+        color: #fff;
+      }
+      .btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      /* Main Workspace */
+      .workspace {
+        display: grid;
+        grid-template-columns: 1fr 290px;
+        gap: 20px;
+        align-items: start;
+      }
+      @media (max-width: 900px) {
+        .workspace {
+          grid-template-columns: 1fr;
+        }
+      }
+      .quiz-area {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .q-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+      }
+      .q-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      .badge {
+        font-size: 0.75rem;
+        font-weight: 700;
+        padding: 3px 9px;
+        border-radius: 999px;
+      }
+      .badge-ch {
+        background: #e2e8f0;
+        color: #334155;
+      }
+      .badge-basic {
+        background: var(--basic-bg);
+        color: var(--basic);
+      }
+      .badge-adv {
+        background: var(--adv-bg);
+        color: var(--adv);
+      }
+      .badge-lvl {
+        background: #f8fafc;
+        color: var(--muted);
+        border: 1px solid var(--border);
+      }
+
+      .q-text {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 14px;
+      }
+      .options {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .opt-btn {
+        text-align: left;
+        padding: 11px 14px;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        background: #fff;
+        cursor: pointer;
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        transition: 0.15s;
+        color: var(--text);
+      }
+      .opt-btn:hover:not(:disabled) {
+        border-color: var(--primary);
+        background: #f8fafc;
+      }
+      .opt-letter {
+        font-weight: 700;
+        min-width: 22px;
+        color: var(--primary);
+      }
+      .opt-btn.selected {
+        border-color: var(--primary);
+        background: #eff6ff;
+        box-shadow: 0 0 0 1px var(--primary);
+      }
+      .opt-btn.correct {
+        border-color: var(--success);
+        background: var(--success-bg);
+        color: #14532d;
+      }
+      .opt-btn.correct .opt-letter {
+        color: var(--success);
+      }
+      .opt-btn.wrong {
+        border-color: var(--danger);
+        background: var(--danger-bg);
+        color: #7f1d1d;
+      }
+      .opt-btn.wrong .opt-letter {
+        color: var(--danger);
+      }
+
+      /* Sidebar Navigator */
+      .sidebar {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 16px;
+        position: sticky;
+        top: 80px;
+      }
+      .sidebar h3 {
+        font-size: 0.95rem;
+        margin-bottom: 10px;
+      }
+      .nav-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 6px;
+        max-height: 360px;
+        overflow-y: auto;
+        margin-bottom: 14px;
+        padding-right: 4px;
+      }
+      .nav-item {
+        padding: 6px 0;
+        font-size: 0.8rem;
+        font-weight: 600;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        background: #fff;
+        cursor: pointer;
+        text-align: center;
+      }
+      .nav-item.answered {
+        background: #dbeafe;
+        border-color: var(--primary);
+        color: var(--primary-dark);
+      }
+      .nav-item.ok {
+        background: var(--success-bg);
+        border-color: var(--success);
+        color: var(--success);
+      }
+      .nav-item.err {
+        background: var(--danger-bg);
+        border-color: var(--danger);
+        color: var(--danger);
+      }
+
+      .summary-box {
+        background: #f8fafc;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 12px;
+        margin-bottom: 12px;
+        font-size: 0.88rem;
+      }
+      .summary-box strong {
+        color: var(--primary);
+      }
+      .empty-state {
+        background: var(--card);
+        border: 1px dashed var(--border);
+        border-radius: 12px;
+        padding: 40px 20px;
+        text-align: center;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="brand">
+        <h1>Ôn Tập Quản Trị Học</h1>
+        <p id="loadedInfo">Đang tải dữ liệu các chương...</p>
+      </div>
+      <div class="header-stats">
+        <div class="pill" id="timerBox">⏱ 00:00</div>
+        <div class="pill" id="scoreBox">Điểm: 0 / 0</div>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="setup-card">
+        <div class="setup-grid">
+          <div>
+            <label for="chapterSelect">Chọn Chương</label>
+            <select id="chapterSelect"></select>
+          </div>
+          <div>
+            <label for="levelSelect">Phân loại Cơ bản / Nâng cao</label>
+            <select id="levelSelect">
+              <option value="all">Tất cả (Cơ bản + Nâng cao)</option>
+              <option value="basic">
+                Cơ bản (Mức 1: Nhận biết & Mức 2: Thông hiểu)
+              </option>
+              <option value="advanced">
+                Nâng cao (Mức 3: Vận dụng tình huống)
+              </option>
+              <option value="1">Chỉ Mức 1: Nhận biết</option>
+              <option value="2">Chỉ Mức 2: Thông hiểu</option>
+            </select>
+          </div>
+          <div>
+            <label for="modeSelect">Chế độ làm bài</label>
+            <select id="modeSelect">
+              <option value="practice">
+                Ôn tập (Chấm điểm & hiện đáp án ngay)
+              </option>
+              <option value="exam">Thi thử (Nộp bài mới chấm điểm)</option>
+            </select>
+          </div>
+          <div>
+            <label for="limitSelect">Số lượng câu</label>
+            <select id="limitSelect">
+              <option value="all">Toàn bộ câu đã lọc</option>
+              <option value="20">20 câu ngẫu nhiên</option>
+              <option value="40">40 câu ngẫu nhiên</option>
+              <option value="60">60 câu ngẫu nhiên</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="controls-row">
+          <div class="checkbox-group">
+            <label
+              ><input type="checkbox" id="shuffleQ" /> Trộn thứ tự câu
+              hỏi</label
+            >
+            <label
+              ><input type="checkbox" id="shuffleOpt" /> Trộn đáp án
+              A/B/C/D</label
+            >
+          </div>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap">
+            <button class="btn btn-primary" onclick="startQuiz()">
+              Bắt đầu làm bài
+            </button>
+            <button
+              class="btn btn-outline"
+              id="btnRetryWrong"
+              onclick="retryWrong()"
+              disabled
+            >
+              Làm lại câu sai (0)
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="workspace">
+        <div class="quiz-area" id="quizArea">
+          <div class="empty-state">
+            Chọn chương, mức độ <strong>Cơ bản / Nâng cao</strong> rồi bấm
+            <strong>Bắt đầu làm bài</strong>.
+          </div>
+        </div>
+
+        <aside class="sidebar">
+          <h3>Danh sách câu hỏi</h3>
+          <div class="summary-box" id="summaryBox">Chưa bắt đầu bài làm.</div>
+          <div class="nav-grid" id="navGrid"></div>
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <button
+              class="btn btn-success"
+              id="btnSubmit"
+              onclick="submitExam()"
+              disabled
+            >
+              Nộp bài & Chấm điểm
+            </button>
+            <button
+              class="btn btn-outline"
+              onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+            >
+              Lên đầu trang
+            </button>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <!-- Khởi tạo kho dữ liệu chung cho 7 chương -->
+    <script>
+      window.QUIZ_CHAPTERS = {};
+    </script>
+    <!-- Nạp lần lượt 7 file chương (thiếu file nào web vẫn chạy bình thường) -->
+    <script src="ch1.js"></script>
+    <script src="ch2.js"></script>
+    <script src="ch3.js"></script>
+    <script src="ch4.js"></script>
+    <script src="ch5.js"></script>
+    <script src="ch6.js"></script>
+    <script src="ch7.js"></script>
+
+    <script>
+      const CHAPTER_TITLES = {
+        1: "Chương 1: Những vấn đề chung của quản trị",
+        2: "Chương 2: Sự phát triển của lý thuyết quản trị",
+        3: "Chương 3: Môi trường hoạt động của tổ chức",
+        4: "Chương 4: Chức năng hoạch định",
+        5: "Chương 5: Chức năng tổ chức",
+        6: "Chương 6: Chức năng lãnh đạo",
+        7: "Chương 7: Chức năng kiểm tra",
+      };
+      const LETTERS = ["A", "B", "C", "D"];
+      const LEVEL_NAME = {
+        1: "Mức 1: Nhận biết",
+        2: "Mức 2: Thông hiểu",
+        3: "Mức 3: Vận dụng",
+      };
+
+      let currentQuestions = [];
+      let userAnswers = {};
+      let mode = "practice";
+      let submitted = false;
+      let timerInterval = null;
+      let seconds = 0;
+
+      function initApp() {
+        const sel = document.getElementById("chapterSelect");
+        let totalLoaded = 0;
+        let loadedChapters = [];
+
+        sel.innerHTML = "";
+        const optAll = document.createElement("option");
+        optAll.value = "all";
+        optAll.textContent = "Tất cả các chương đã nạp";
+        sel.appendChild(optAll);
+
+        for (let i = 1; i <= 7; i++) {
+          const list = window.QUIZ_CHAPTERS[i];
+          const opt = document.createElement("option");
+          opt.value = String(i);
+          if (Array.isArray(list) && list.length > 0) {
+            totalLoaded += list.length;
+            loadedChapters.push(i);
+            opt.textContent = `${CHAPTER_TITLES[i]} (${list.length} câu)`;
+          } else {
+            opt.textContent = `${CHAPTER_TITLES[i]} (Chưa có file ch${i}.js)`;
+            opt.disabled = true;
+          }
+          sel.appendChild(opt);
+        }
+
+        document.getElementById("loadedInfo").textContent =
+          `Đã nạp ${loadedChapters.length}/7 chương — Tổng cộng ${totalLoaded} câu hỏi`;
+
+        if (loadedChapters.length === 1) {
+          sel.value = String(loadedChapters[0]);
+        }
+      }
+
+      function shuffleArray(arr) {
+        const a = [...arr];
+        for (let i = a.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+      }
+
+      function startQuiz(customList = null) {
+        clearInterval(timerInterval);
+        seconds = 0;
+        submitted = false;
+        userAnswers = {};
+        mode = document.getElementById("modeSelect").value;
+
+        let pool = [];
+        if (customList) {
+          pool = customList;
+        } else {
+          const chVal = document.getElementById("chapterSelect").value;
+          const lvlVal = document.getElementById("levelSelect").value;
+          const limitVal = document.getElementById("limitSelect").value;
+          const doShuffleQ = document.getElementById("shuffleQ").checked;
+
+          const chKeys =
+            chVal === "all" ? Object.keys(window.QUIZ_CHAPTERS) : [chVal];
+          chKeys.forEach((k) => {
+            const arr = window.QUIZ_CHAPTERS[k] || [];
+            arr.forEach((item, idx) => {
+              // item format: [questionText, [optA, optB, optC, optD], correctIdx, level(1|2|3)]
+              const lvl = item[3];
+              const isBasic = lvl === 1 || lvl === 2;
+              const match =
+                lvlVal === "all" ||
+                (lvlVal === "basic" && isBasic) ||
+                (lvlVal === "advanced" && lvl === 3) ||
+                String(lvl) === lvlVal;
+              if (match) {
+                pool.push({
+                  uid: `c${k}_q${idx + 1}`,
+                  chapter: Number(k),
+                  origNum: idx + 1,
+                  q: item[0],
+                  opts: item[1],
+                  ans: item[2],
+                  lvl: lvl,
+                });
+              }
+            });
+          });
+
+          if (doShuffleQ || limitVal !== "all") {
+            pool = shuffleArray(pool);
+          }
+          if (limitVal !== "all") {
+            pool = pool.slice(0, Number(limitVal));
+          }
+        }
+
+        const doShuffleOpt = document.getElementById("shuffleOpt").checked;
+        currentQuestions = pool.map((item) => {
+          if (!doShuffleOpt) return { ...item };
+          const paired = item.opts.map((text, i) => ({
+            text,
+            isCorrect: i === item.ans,
+          }));
+          const mixed = shuffleArray(paired);
+          return {
+            ...item,
+            opts: mixed.map((x) => x.text),
+            ans: mixed.findIndex((x) => x.isCorrect),
+          };
+        });
+
+        if (currentQuestions.length === 0) {
+          document.getElementById("quizArea").innerHTML =
+            `<div class="empty-state">Không tìm thấy câu hỏi phù hợp với bộ lọc hiện tại.</div>`;
+          return;
+        }
+
+        document.getElementById("btnSubmit").disabled = mode === "practice";
+        renderQuiz();
+        updateStats();
+        timerInterval = setInterval(() => {
+          seconds++;
+          const m = String(Math.floor(seconds / 60)).padStart(2, "0");
+          const s = String(seconds % 60).padStart(2, "0");
+          document.getElementById("timerBox").textContent = `⏱ ${m}:${s}`;
+        }, 1000);
+      }
+
+      function renderQuiz() {
+        const area = document.getElementById("quizArea");
+        const nav = document.getElementById("navGrid");
+        area.innerHTML = "";
+        nav.innerHTML = "";
+
+        currentQuestions.forEach((qObj, idx) => {
+          const isBasic = qObj.lvl <= 2;
+          const card = document.createElement("div");
+          card.className = "q-card";
+          card.id = `card_${idx}`;
+
+          card.innerHTML = `
+          <div class="q-meta">
+            <span class="badge badge-ch">Chương ${qObj.chapter} — Câu ${qObj.origNum}</span>
+            <span class="badge ${isBasic ? "badge-basic" : "badge-adv"}">${isBasic ? "Cơ bản" : "Nâng cao"}</span>
+            <span class="badge badge-lvl">${LEVEL_NAME[qObj.lvl]}</span>
+          </div>
+          <div class="q-text">Câu ${idx + 1}. ${qObj.q}</div>
+          <div class="options" id="opts_${idx}">
+            ${qObj.opts
+              .map(
+                (optText, oIdx) => `
+              <button class="opt-btn" id="opt_${idx}_${oIdx}" onclick="selectOption(${idx}, ${oIdx})">
+                <span class="opt-letter">${LETTERS[oIdx]}.</span>
+                <span>${optText}</span>
+              </button>
+            `,
+              )
+              .join("")}
+          </div>
+        `;
+          area.appendChild(card);
+
+          const navBtn = document.createElement("button");
+          navBtn.className = "nav-item";
+          navBtn.id = `nav_${idx}`;
+          navBtn.textContent = idx + 1;
+          navBtn.onclick = () => {
+            document
+              .getElementById(`card_${idx}`)
+              .scrollIntoView({ behavior: "smooth", block: "center" });
+          };
+          nav.appendChild(navBtn);
+        });
+      }
+
+      function selectOption(qIdx, optIdx) {
+        if (submitted) return;
+        if (mode === "practice" && userAnswers[qIdx] !== undefined) return;
+
+        userAnswers[qIdx] = optIdx;
+        const qObj = currentQuestions[qIdx];
+
+        for (let i = 0; i < 4; i++) {
+          const btn = document.getElementById(`opt_${qIdx}_${i}`);
+          btn.classList.remove("selected", "correct", "wrong");
+          if (mode === "practice") {
+            btn.disabled = true;
+            if (i === qObj.ans) btn.classList.add("correct");
+            if (i === optIdx && optIdx !== qObj.ans) btn.classList.add("wrong");
+          } else {
+            if (i === optIdx) btn.classList.add("selected");
+          }
+        }
+
+        const navBtn = document.getElementById(`nav_${qIdx}`);
+        navBtn.classList.remove("answered", "ok", "err");
+        if (mode === "practice") {
+          navBtn.classList.add(optIdx === qObj.ans ? "ok" : "err");
+        } else {
+          navBtn.classList.add("answered");
+        }
+
+        updateStats();
+      }
+
+      function submitExam() {
+        if (submitted || currentQuestions.length === 0) return;
+        submitted = true;
+        clearInterval(timerInterval);
+        document.getElementById("btnSubmit").disabled = true;
+
+        currentQuestions.forEach((qObj, qIdx) => {
+          const chosen = userAnswers[qIdx];
+          const navBtn = document.getElementById(`nav_${qIdx}`);
+          navBtn.classList.remove("answered", "ok", "err");
+
+          for (let i = 0; i < 4; i++) {
+            const btn = document.getElementById(`opt_${qIdx}_${i}`);
+            btn.disabled = true;
+            btn.classList.remove("selected");
+            if (i === qObj.ans) btn.classList.add("correct");
+            if (chosen === i && chosen !== qObj.ans) btn.classList.add("wrong");
+          }
+          navBtn.classList.add(chosen === qObj.ans ? "ok" : "err");
+        });
+
+        updateStats();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function updateStats() {
+        const total = currentQuestions.length;
+        const answeredCount = Object.keys(userAnswers).length;
+        let correctCount = 0;
+        let wrongCount = 0;
+
+        currentQuestions.forEach((qObj, idx) => {
+          if (userAnswers[idx] !== undefined) {
+            if (userAnswers[idx] === qObj.ans) correctCount++;
+            else wrongCount++;
+          } else if (submitted) {
+            wrongCount++;
+          }
+        });
+
+        const showScore = mode === "practice" || submitted;
+        const score10 =
+          total > 0 ? ((correctCount / total) * 10).toFixed(2) : "0.00";
+        document.getElementById("scoreBox").textContent = showScore
+          ? `Đúng: ${correctCount}/${total} (${score10}đ)`
+          : `Đã làm: ${answeredCount}/${total}`;
+
+        document.getElementById("summaryBox").innerHTML = showScore
+          ? `Tổng: <strong>${total}</strong> câu | Đã làm: <strong>${answeredCount}</strong><br>
+           Đúng: <strong style="color:var(--success)">${correctCount}</strong> |
+           Sai: <strong style="color:var(--danger)">${wrongCount}</strong> |
+           Thang 10: <strong>${score10}</strong>`
+          : `Tổng: <strong>${total}</strong> câu | Đã chọn: <strong>${answeredCount}</strong><br>
+           Bấm <strong>Nộp bài</strong> khi làm xong để chấm điểm.`;
+
+        const btnRetry = document.getElementById("btnRetryWrong");
+        btnRetry.textContent = `Làm lại câu sai (${showScore ? wrongCount : 0})`;
+        btnRetry.disabled = !(showScore && wrongCount > 0);
+      }
+
+      function retryWrong() {
+        const wrongList = currentQuestions.filter(
+          (qObj, idx) => userAnswers[idx] !== qObj.ans,
+        );
+        if (wrongList.length > 0) startQuiz(wrongList);
+      }
+
+      window.addEventListener("DOMContentLoaded", initApp);
+    </script>
+  </body>
+</html>
